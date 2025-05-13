@@ -1,0 +1,13 @@
+{
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar"
+    ],
+    "java.dependency.packagePresentation": "hierarchical",
+    "java.import.gradle.enabled": false,
+    "java.import.maven.enabled": true,
+    "maven.executable.path": "mvn",
+    "java.server.launchMode": "Standard",
+    "spring-boot.ls.jdtLs.java.home": "/Library/Java/JavaVirtualMachines/jdk-24.jdk/Contents/Home",
+    "java.compile.nullAnalysis.mode": "automatic"
+}

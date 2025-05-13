@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Swagger InteropCare API",
+            "request": "launch",
+            "mainClass": "com.interopcare.swagger.SwaggerInteropCare",
+            "projectName": "swagger-api",
+            "args": ""
+        }
+    ]
+}
