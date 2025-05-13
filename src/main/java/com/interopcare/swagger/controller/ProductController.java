@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -24,8 +25,8 @@ public class ProductController {
 
     public ProductController() {
         // Initialize with sample data
-        products.add(new Product(counter.incrementAndGet(), "Laptop", 999.99, "High-performance laptop"));
-        products.add(new Product(counter.incrementAndGet(), "Smartphone", 699.99, "Latest model smartphone"));
+        products.add(new Product(counter.incrementAndGet(), "Laptop", new BigDecimal(999.99), "High-performance laptop"));
+        products.add(new Product(counter.incrementAndGet(), "Smartphone", new BigDecimal(699.99), "Latest model smartphone"));
     }
 
     @GetMapping

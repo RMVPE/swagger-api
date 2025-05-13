@@ -1,6 +1,7 @@
 package com.interopcare.swagger.model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
@@ -41,10 +42,10 @@ public class Product {
     // Constructors, getters, and setters remain the same
     public Product() {}
     
-    public Product(Long id, String name, Double price, String description) {
+    public Product(Long id, String name, BigDecimal price, String description) {
         this.id = id;
         this.name = name;
-        this.price = price;
+        this.price = price.setScale(2, RoundingMode.HALF_UP);
         this.description = description;
     }
 
@@ -52,8 +53,8 @@ public class Product {
     public void setId(Long id) { this.id = id; }
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
-    public Double getPrice() { return price; }
-    public void setPrice(Double price) { this.price = price; }
+    public @Positive(message = "Price must be positive") @DecimalMin(value = "0.01", message = "Price must be ≥ $0.01") BigDecimal getPrice() { return price; }
+    public void setPrice(BigDecimal price) { this.price = price.setScale(2, RoundingMode.HALF_UP);; }
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 }
