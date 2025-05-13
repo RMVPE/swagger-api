@@ -1,7 +1,13 @@
 package com.interopcare.swagger.model;
 
+import java.math.BigDecimal;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive; 
 
 @Schema(description = "Product information")
 public class Product {
@@ -13,10 +19,21 @@ public class Product {
         requiredMode = RequiredMode.REQUIRED, 
         example = "Laptop"
     )
+    @NotBlank(message = "Product name cannot be empty")
+    @Size(min = 2, max = 100, message = "Name must be 2-100 characters")
+
+
     private String name;
     
-    @Schema(description = "Price of the product", example = "999.99")
-    private Double price;
+    @Schema(
+        description = "Price in USD", 
+        requiredMode = RequiredMode.REQUIRED,
+        example = "999.99"
+    )
+    @Positive(message = "Price must be positive")
+    @DecimalMin(value = "0.01", message = "Price must be ≥ $0.01")
+
+    private BigDecimal price;
     
     @Schema(description = "Product description", example = "High-performance laptop")
     private String description;

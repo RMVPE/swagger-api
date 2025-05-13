@@ -6,6 +6,8 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -53,7 +55,7 @@ public class ProductController {
     @ApiResponse(responseCode = "200", description = "Product created successfully")
     public Product createProduct(
             @Parameter(description = "Product object", required = true)
-            @RequestBody Product product) {
+            @RequestBody @Valid Product product) {
         product.setId(counter.incrementAndGet());
         products.add(product);
         return product;
@@ -69,7 +71,7 @@ public class ProductController {
             @Parameter(description = "Product ID", required = true, example = "1")
             @PathVariable Long id,
             @Parameter(description = "Updated product object", required = true)
-            @RequestBody Product productDetails) {
+            @RequestBody @Valid Product productDetails) {
         Product product = products.stream()
                 .filter(p -> p.getId().equals(id))
                 .findFirst()
