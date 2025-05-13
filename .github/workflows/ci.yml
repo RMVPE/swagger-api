@@ -18,10 +18,16 @@ jobs:
       - name: Run tests
         run: mvn test
     
-      - name: Verify Swagger Docs
+      - name: Verify OpenAPI docs
         run: |
-          echo "Checking OpenAPI spec generation"
-          test -f target/classes/META-INF/openapi.json || exit 1
+          echo "Checking for OpenAPI spec"
+          # Check both possible locations
+          if [ ! -f "target/classes/META-INF/openapi.json" ] && [ ! -f "target/classes/static/docs/openapi.json" ]; then
+            echo "::error::OpenAPI spec not found!"
+            exit 1
+          else
+            echo "OpenAPI spec found"
+          fi
         
       - name: Upload Artifacts
         if: success()
