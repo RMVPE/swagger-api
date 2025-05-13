@@ -2,6 +2,8 @@ name: Java CI/CD
 
 on: [push, pull_request]
 
+permissions:
+  contents: write  # Required for artifact upload
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,7 +25,8 @@ jobs:
         
       - name: Upload Artifacts
         if: success()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4  # Updated to v4
         with:
           name: application-jar
           path: target/*.jar
+          retention-days: 1  # Auto-cleanup after 1 day
