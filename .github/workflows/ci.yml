@@ -1,4 +1,4 @@
-name: Java CI
+name: Java CI/CD
 
 on: [push, pull_request]
 
@@ -13,3 +13,5 @@ jobs:
           java-version: '22'
           distribution: 'temurin'
       - run: mvn clean package
+      - name: Run tests
+        run: mvn test
