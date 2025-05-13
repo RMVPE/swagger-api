@@ -15,3 +15,15 @@ jobs:
       - run: mvn clean package
       - name: Run tests
         run: mvn test
+    
+      - name: Verify Swagger Docs
+        run: |
+          echo "Checking OpenAPI spec generation"
+          test -f target/classes/META-INF/openapi.json || exit 1
+        
+      - name: Upload Artifacts
+        if: success()
+        uses: actions/upload-artifact@v3
+        with:
+          name: application-jar
+          path: target/*.jar
